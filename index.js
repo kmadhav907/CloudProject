@@ -8,7 +8,7 @@ import Encrypt from "./model/encrytionModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-const port = process.env.port || 4000;
+const port = process.env.PORT || 4000;
 const app = express();
 
 app.set("view engine", "ejs");
