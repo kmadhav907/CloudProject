@@ -5,11 +5,12 @@
     </div>
     <div class="box">
     
-        <form action="/" class="item" method="post">
-        <input type="text" name="message" placeholder="New Item" autocomplete="off" />
-        <button type="submit" name='list' > Enter your message </button>
+        <form action="/" class="form" method="post">
+            <legend>Encryption Message</legend>
+        <input type="text" name="message" placeholder="Enter the message" autocomplete="off" />
+        <button type="submit" name='list' class='btnSubmit'> Encrypt </button>
 
-    </form>
+        </form>
     </div>
     
     <p><%= error %></p>

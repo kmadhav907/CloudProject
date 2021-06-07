@@ -1,32 +1,35 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import connectDB from './databse/config.js';
-import Encrpyt from './model/encrytionModel.js';
-import { encryptAlgo } from './Encryption.js';
-import expressAsyncHandler from 'express-async-handler';
-import Encrypt from './model/encrytionModel.js';
+import express from "express";
+import bodyParser from "body-parser";
+import connectDB from "./databse/config.js";
+import Encrpyt from "./model/encrytionModel.js";
+import { encryptAlgo } from "./Encryption.js";
+import expressAsyncHandler from "express-async-handler";
+import Encrypt from "./model/encrytionModel.js";
+import dotenv from "dotenv";
+dotenv.config();
 
+const port = process.env.port || 4000;
 const app = express();
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 connectDB();
 
-app.get('/', (req, res) => {
-  res.render('list', { error: error });
+app.get("/", (req, res) => {
+  res.render("list", { error: error });
 });
 
-var result = '';
-var error = '';
-app.get('/result', (req, res) => {
-  res.render('result', { result: result });
+var result = "";
+var error = "";
+app.get("/result", (req, res) => {
+  res.render("result", { result: result });
 });
 
 app.post(
-  '/',
+  "/",
   expressAsyncHandler(async (req, res) => {
     const encryptionMessage = req.body.message;
     console.log(encryptionMessage);
@@ -35,20 +38,20 @@ app.post(
     const encrpytObject = new Encrypt({
       data,
       encryptedmessage,
-      decryptionMessage
+      decryptionMessage,
     });
 
     const createObject = await encrpytObject.save();
     if (createObject) {
-      res.redirect('/result');
+      res.redirect("/result");
       result = encryptedmessage;
     } else {
-      error = 'Cant Connect to database';
-      res.redirect('/');
+      error = "Cant Connect to database";
+      res.redirect("/");
     }
   })
 );
 
-app.listen(4000, () => {
-  console.log('Server is running on Port 4000');
+app.listen(port, () => {
+  console.log("Server is running on Port 4000");
 });
