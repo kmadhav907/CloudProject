@@ -44,7 +44,7 @@ app.post(
     const createObject = await encrpytObject.save();
     if (createObject) {
       res.redirect("/result");
-      result = encryptedmessage;
+      result = createObject;
     } else {
       error = "Cant Connect to database";
       res.redirect("/");
