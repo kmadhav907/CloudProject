@@ -186,4 +186,4 @@ var Crypto = function (alpha, gen, C) {
 // console.log('Eve reads: ');
 // console.log('     ' + Eve.decrypt(message1));
 // console.log('     ' + Eve.decrypt(message2));
-var result = encryptAlgo('Nidhi Rai');
+
